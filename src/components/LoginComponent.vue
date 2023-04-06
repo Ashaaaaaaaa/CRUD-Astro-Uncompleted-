@@ -5,8 +5,13 @@
     <div class="wrapper">
     <div class="card-form">
         <div class="card-content">
-            <h3 class="title">Register</h3>
-            <form @submit.prevent="loginData">
+            <h3 class="title">Login</h3>
+            <ul class="alert alert-warning" v-if="Object.keys(this.errorList).length > 0">
+              <li class="mb-0 ms-3" v-for="(error, index) in this.errorList" :key="index">
+                  {{ error[0] }}
+              </li>
+            </ul>
+            <form method="POST">
             
             <div class="input-parent">
                 <input class="input" type="text" id="email" name="email" v-model="user.email" required>
@@ -25,7 +30,7 @@
                   didn't have an account? please <a href="/">Register!</a>
                </p>
                 </div>
-             <button class="submitbtn" type="submit">Submit</button>
+             <button class="submitbtn" type="button" @click="loginData">Submit</button>
             </div>
             </form>
         </div>
@@ -45,6 +50,7 @@ export default {
     name: 'Login',
     data () {
         return {
+            errorList: '',
             result: {},
             user:{
                 email: '',
@@ -99,22 +105,30 @@ export default {
     methods: {
         
         loginData(){
+
+            var $this = this;
             axios.post('http://127.0.0.1:8000/api/login', this.user)
-                .then(
-                    ({data})=>{
-                        console.log(data);
-                        try {
-                            if (data.status === true) {
-                                alert("Logim Successfully");
-                                window.location = "/mahasiswa";
-                            } else {
-                                alert("Login Failed")
-                            }
-                        } catch (error) {
-                            alert('Error, please try again');
+                .then(res =>{
+                    
+                        console.log(res.data);
+                        alert(res.data.message);
+
+                        window.location = "/mahasiswa";
+                    })
+                    .catch(function (error) {
+
+                    if (error.response) {
+                        if(error.response.status == 422 || error.response.status == 500) {
+
+                            $this.errorList = error.response.data.errors;
                         }
+                    } else if (error.request) {
+                    console.log(error.request);
+                    } else {
+                    console.log('Error', error.message);
                     }
-                )
+                })
+
         },
 
         logoutData(){
