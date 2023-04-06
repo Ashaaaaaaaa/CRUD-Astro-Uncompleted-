@@ -1,0 +1,9 @@
+---
+import UserLayout from "../layouts/UserLayout.astro";
+import Logout from "../components/Logout.vue";
+
+---
+
+<UserLayout>
+	<Logout client:only="vue"></Logout>
+</UserLayout>

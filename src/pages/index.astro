@@ -1,13 +1,9 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro";
-import TableComp from "../components/TableComp.vue";
-import CreateModal from "../components/CreateModal.vue";
-import EditModal from "../components/EditModal.vue";
+import UserLayout from "../layouts/UserLayout.astro";
+import RegisterComponent from "../components/RegisterComponent.vue";
+
 ---
 
-<MainLayout>
-	<TableComp client:only="vue">
-		<CreateModal slot="create" client:only="vue"></CreateModal>
-		<EditModal slot="edit" client:only="vue"></EditModal>
-	</TableComp>
-</MainLayout>
+<UserLayout>
+	<RegisterComponent client:only="vue"></RegisterComponent>
+</UserLayout>

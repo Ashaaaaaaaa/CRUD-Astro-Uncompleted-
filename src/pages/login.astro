@@ -1,0 +1,9 @@
+---
+import UserLayout from "../layouts/UserLayout.astro";
+import LoginComponent from "../components/LoginComponent.vue";
+
+---
+
+<UserLayout>
+	<LoginComponent client:only="vue"></LoginComponent>
+</UserLayout>
