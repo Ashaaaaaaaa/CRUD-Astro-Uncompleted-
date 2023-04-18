@@ -32,7 +32,7 @@
                 <td>
                     <button class="bg-transparent" style="border: none" @click="deleteMahasiswa(mahasiswa.id)"><a href="#" style="color: rgb(221, 221, 221)"><i class="fa-solid fa-trash"></i></a></button>
                     <button class="bg-transparent ms-2" style="border: none"  data-bs-toggle="modal" :data-bs-target="'#edit' + mahasiswa.id"><i class="fa-solid fa-pen-to-square " style="color: rgb(235, 235, 235)"></i></button>
-                    <button class="bg-transparent ms-2" style="border: none"><a href=""><i class="fa-regular fa-eye" style="color: rgb(235, 235, 235)"></i></a></button>
+                    <button class="bg-transparent ms-2" style="border: none" @click="this.display = true + mahasiswa.id"><i class="fa-regular fa-eye" style="color: rgb(235, 235, 235)"></i></button>
                 </td>
 
                 <div
@@ -136,6 +136,66 @@
                     </div>
                     </div>
                 </div>
+
+                <template v-if="display === true + mahasiswa.id">
+                <div class="content2" style="top: 50px">
+                    <div class="container-fluid " style="background-color: rgb(54, 54, 54); padding-bottom:30px; border:1px solid rgb(109, 109, 109);">
+                            <div class="bgcreate mt-2 align-item-center" style="background-color:transparent; ">
+                                <a type="button" class="crtbtn ms-3 btn" role="button"  style="margin-top:13px; font-weight:600; width:auto; height:auto"  @click="this.display = false">Go back <i class="fa-solid fa-arrow-left-long"></i></a>
+                            </div>
+                            <hr style="color: aliceblue">
+                                <div class="container-fluid d-flex mt-5 justify-content-evenly">
+                                    <img src="https://i.pinimg.com/736x/d0/85/32/d0853248f043d7010f280d5b43687dc0.jpg" alt="" style="width:300px">
+                                    <div class="row justify-content-end">
+                                        <div class="col-5">
+                                            <div class="card text-bg-dark d-flex">
+                                                <div class="card-header text-center">
+                                                Npm
+                                                </div>
+                                                <div class="card-body">
+                                                    <i class="fa-regular fa-hashtag fa-2xl me-2"></i>
+                                                    <p style="display: inline">{{ mahasiswa.npm }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="card text-bg-dark d-flex">
+                                                <div class="card-header text-center">
+                                                Name Mahasiswa
+                                                </div>
+                                                <div class="card-body">
+                                                    <i class="fa-solid fa-user fa-2xl me-2"></i>
+                                                    <p style="display: inline">{{ mahasiswa.name_mahasiswa }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="card text-bg-dark d-flex">
+                                                <div class="card-header text-center">
+                                                Fakultas
+                                                </div>
+                                                <div class="card-body">
+                                                    <i class="fa-solid fa-chess-rook fa-2xl me-2"></i>
+                                                    <p style="display: inline">{{ mahasiswa.fakultas }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="card text-bg-dark d-flex">
+                                                <div class="card-header text-center">
+                                                Prodi
+                                                </div>
+                                                <div class="card-body">
+                                                    <i class="fa-solid fa-book fa-2xl me-2"></i>
+                                                    <p style="display: inline">{{ mahasiswa.prodi }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+                </template>
                 </tr>
                 
             </tbody>
@@ -150,6 +210,7 @@ export default {
     name: 'mahasiswas',
     data(){
         return {
+            display: false,
             mahasiswas: [],
             mahasiswaId: '',
             errorList: '',
